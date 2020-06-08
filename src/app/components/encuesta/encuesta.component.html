@@ -2,22 +2,22 @@
     <div class="row">
         <div class="col-md-12 text-center">
 
-            <form>
+            <form #encuestaForm="ngForm" (ngSubmit)="enviarEncuesta(encuestaForm)" >
 
                 <div class="form-group">
                     <label for="sgi">Ingresa tu SGI</label>
-                    <input type="text" class="form-control form-control-sm" name="sgi" id="sgi">
+                    <input type="text" class="form-control form-control-sm" name="sgi" id="sgi" #sgi="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.sgi" >
                 </div>
 
                 <div class="form-group">
                     <label for="">1.- Primer pregunta</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="primerPregunta" id="primerSi" value="Si">
+                        <input class="form-check-input" type="radio" name="primerPregunta" id="primerSi" value="Si" #primerPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.primerPregunta">
                         <label class="form-check-label" for="primerSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="primerPregunta" id="primerNo" value="No">
+                        <input class="form-check-input" type="radio" name="primerPregunta" id="primerNo" value="No" #primerPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.primerPregunta">
                         <label class="form-check-label" for="primerNo">No</label>
                     </div>
                 </div>
@@ -26,11 +26,11 @@
                     <label for="">2.- Segunda pregunta</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="segundaPregunta" id="segundoSi" value="Si">
+                        <input class="form-check-input" type="radio" name="segundaPregunta" id="segundoSi" value="Si" #segundaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.segundaPregunta">
                         <label class="form-check-label" for="segundoSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="segundaPregunta" id="segundoNo" value="No">
+                        <input class="form-check-input" type="radio" name="segundaPregunta" id="segundoNo" value="No" #segundaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.segundaPregunta">
                         <label class="form-check-label" for="segundoNo">No</label>
                     </div>
                 </div>
@@ -39,11 +39,11 @@
                     <label for="">3.- Tercer pregunta</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tercerPregunta" id="tercerSi" value="Si">
+                        <input class="form-check-input" type="radio" name="tercerPregunta" id="tercerSi" value="Si" #tercerPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.tercerPregunta">
                         <label class="form-check-label" for="tercerSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tercerPregunta" id="tercerNo" value="No">
+                        <input class="form-check-input" type="radio" name="tercerPregunta" id="tercerNo" value="No" #tercerPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.tercerPregunta">
                         <label class="form-check-label" for="tercerNo">No</label>
                     </div>
                 </div>
@@ -52,11 +52,11 @@
                     <label for="">4.- Cuarta pregunta</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="cuartaPregunta" id="cuartaSi" value="Si">
+                        <input class="form-check-input" type="radio" name="cuartaPregunta" id="cuartaSi" value="Si" #cuartaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.cuartaPregunta">
                         <label class="form-check-label" for="cuartaSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="cuartaPregunta" id="cuartaNo" value="No">
+                        <input class="form-check-input" type="radio" name="cuartaPregunta" id="cuartaNo" value="No" #cuartaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.cuartaPregunta">
                         <label class="form-check-label" for="cuartaNo">No</label>
                     </div>
                 </div>
@@ -65,19 +65,25 @@
                     <label for="">5.- Quinta pregunta</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="quintaPregunta" id="quintaSi" value="Si">
+                        <input class="form-check-input" type="radio" name="quintaPregunta" id="quintaSi" value="Si" #quintaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.quintaPregunta">
                         <label class="form-check-label" for="quintaSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="quintaPregunta" id="quintaNo" value="No">
+                        <input class="form-check-input" type="radio" name="quintaPregunta" id="quintaNo" value="No" #quintaPregunta="ngModel" [(ngModel)]="encuestaService.selectedEncuesta.quintaPregunta">
                         <label class="form-check-label" for="quintaNo">No</label>
                     </div>
                 </div>
 
+                <button class="btn btn-dark">Enviar Respuestas</button>
+
             </form>
 
-            <button class="btn btn-dark">Enviar Respuestas</button>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img class="images" [src]="img">
         </div>
     </div>
 </div>
