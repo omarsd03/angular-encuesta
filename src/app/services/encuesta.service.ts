@@ -21,4 +21,8 @@ export class EncuestaService {
     return this.http.post(this.URL_API, encuesta);
   }
 
+  getEncuesta(id: string) {
+    return this.http.get(this.URL_API + `/${id}`);
+  }
+
 }
