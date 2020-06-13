@@ -34,6 +34,7 @@ export class LecturaComponent implements OnInit {
 
           this.encuestaService.getEncuesta(data.id).subscribe((resp: any)=> {
             console.log(resp);
+            this.stopScan(codeReader);
           });
           
         }).catch((err) => console.log(err));
@@ -42,5 +43,10 @@ export class LecturaComponent implements OnInit {
 
     }).catch((err) => console.log(err));
 
+  }
+
+  stopScan(codeReader) {
+    codeReader.reset();
+    this.escanearQR();
   }
 }
