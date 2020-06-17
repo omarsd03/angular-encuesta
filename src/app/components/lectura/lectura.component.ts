@@ -10,43 +10,67 @@ import { BrowserQRCodeReader } from '@zxing/library';
   styleUrls: ['./lectura.component.css'],
 })
 export class LecturaComponent implements OnInit {
+
+  codeReader = new BrowserQRCodeReader();
+
+  deviceObjects: any = [];
+  selectedDeviceObj: any = '';
+
   constructor(public encuestaService: EncuestaService) {}
 
   ngOnInit() {
-    this.escanearQR();
+    this.listarDispositivos();
   }
 
-  escanearQR() {
+  listarDispositivos() {
 
     const codeReader = new BrowserQRCodeReader();
 
     codeReader.listVideoInputDevices().then((videoInputDevices) => {
 
-      videoInputDevices.forEach((device) => {
-        
-        console.log(`${device.label}, ${device.deviceId}`);
-        const firstDeviceId = videoInputDevices[0].deviceId;
-
-        codeReader.decodeOnceFromVideoDevice(firstDeviceId, 'video').then((result) => {
-
-          const resultado = result.getText();
-          const data = JSON.parse(resultado);
-
-          this.encuestaService.getEncuesta(data.id).subscribe((resp: any)=> {
-            console.log(resp);
-            this.stopScan(codeReader);
-          });
-          
-        }).catch((err) => console.log(err));
-
-      });
+      this.deviceObjects = videoInputDevices;
+      // this.selectedDeviceObj = this.deviceObjects[0];
+      // this.escanearQR(this.selectedDeviceObj.deviceId);
 
     }).catch((err) => console.log(err));
 
   }
 
+  escanearQR(deviceId) {
+
+    if (deviceId === '') {
+      return;
+    }
+
+    const codeReader = new BrowserQRCodeReader();
+
+    codeReader.decodeOnceFromVideoDevice(deviceId, 'video').then((result) => {
+
+      const resultado = result.getText();
+      const data = JSON.parse(resultado);
+
+      this.encuestaService.getEncuesta(data.id).subscribe((resp: any) => {
+        console.log(resp);
+        this.stopScan(codeReader);
+      });
+
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  }
+
   stopScan(codeReader) {
     codeReader.reset();
-    this.escanearQR();
+    // console.log(this.selectedDeviceObj);
+    this.escanearQR(this.selectedDeviceObj);
   }
+
+  onChangeObj(newObj) {
+    console.log(newObj);
+    this.selectedDeviceObj = newObj;
+    this.escanearQR(newObj);
+    // ... do other stuff here ...
+  }
+
 }

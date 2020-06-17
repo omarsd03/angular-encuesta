@@ -1,7 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+        </div>
+        <div class="col-md-6">
+
+            <!-- <select class="form-control input-sm" [ngModel]="selectedDeviceObj" (ngModelChange)="onChangeObj($event)" name="cameras">
+                <option [value]="device.deviceId" *ngFor="let device of deviceObjects; let i=index;" [selected]="i == 0">{{device.label}}</option>
+            </select> -->
+
+            <div *ngFor="let device of deviceObjects">
+                <label for="enum_answer_{{device.deviceId}}">
+                    <input id="enum_answer_{{device.deviceId}}" [value]='device.deviceId' type="radio" name="enums" [(ngModel)]="this.selectedDeviceObj" (ngModelChange)="onChangeObj($event)">
+                    {{device.label}}
+                </label>
+            </div>
+
         </div>
     </div>
 </div>
